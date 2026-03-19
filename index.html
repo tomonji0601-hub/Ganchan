@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>土質試験サポート</title>
+  <meta name="theme-color" content="#2d5f73" />
+  <meta name="description" content="含水比計算と試料調整を行えるシンプルな土質試験サポートアプリ" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <h1>土質試験サポート</h1>
+      <p>含水比計算・試料調整を1つで管理</p>
+    </header>
+
+    <nav class="mode-tabs" aria-label="モード切替">
+      <button id="tab-water" class="tab-button active" type="button">含水比計算</button>
+      <button id="tab-adjust" class="tab-button" type="button">試料調整</button>
+    </nav>
+
+    <section id="mode-water" class="mode-panel active">
+      <div class="card">
+        <h2>含水比計算モード</h2>
+        <p class="formula">w(%) = 100 × (ma - mb) / (mb - mc)</p>
+
+        <div class="grid">
+          <label>
+            <span>試料名</span>
+            <input id="water-sample" type="text" placeholder="例：KIKAI-01" />
+          </label>
+          <label>
+            <span>ma：湿潤試料＋皿 (g)</span>
+            <input id="ma" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+          <label>
+            <span>mb：乾燥試料＋皿 (g)</span>
+            <input id="mb" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+          <label>
+            <span>mc：皿 (g)</span>
+            <input id="mc" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+        </div>
+
+        <div class="result-box">
+          <span>計算結果</span>
+          <strong id="water-result">—</strong>
+        </div>
+
+        <div class="button-row">
+          <button id="save-water" type="button">保存</button>
+          <button id="export-water" type="button" class="secondary">CSV出力</button>
+          <button id="clear-water" type="button" class="danger">履歴削除</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <h3>保存履歴</h3>
+          <small>時刻は自動取得</small>
+        </div>
+        <div id="water-history" class="history-list"></div>
+      </div>
+    </section>
+
+    <section id="mode-adjust" class="mode-panel">
+      <div class="card">
+        <h2>試料調整モード</h2>
+        <p class="formula">mw = mi / (1 + w1/100) × (1 + w/100) - mi</p>
+        <p class="note">※ 1 mL = 1 g として扱います。</p>
+
+        <div class="grid">
+          <label>
+            <span>試料名</span>
+            <input id="adjust-sample" type="text" placeholder="例：KIKAI-02" />
+          </label>
+          <label>
+            <span>w：調整後の含水比 (%)</span>
+            <input id="target-w" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+          <label>
+            <span>mi：湿潤試料の質量 (g)</span>
+            <input id="mi" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+          <label>
+            <span>w1：湿潤試料の含水比 (%)</span>
+            <input id="w1" type="number" inputmode="decimal" step="any" placeholder="0.00" />
+          </label>
+        </div>
+
+        <div class="result-box">
+          <span>加える水の質量</span>
+          <strong id="adjust-result">—</strong>
+        </div>
+
+        <div class="button-row">
+          <button id="save-adjust" type="button">保存</button>
+          <button id="export-adjust" type="button" class="secondary">CSV出力</button>
+          <button id="clear-adjust" type="button" class="danger">履歴削除</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-header">
+          <h3>保存履歴</h3>
+          <small>時刻は自動取得</small>
+        </div>
+        <div id="adjust-history" class="history-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

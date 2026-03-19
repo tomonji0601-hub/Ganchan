@@ -1,0 +1,10 @@
+{
+  "name": "土質試験サポート",
+  "short_name": "土質試験",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f4f7f8",
+  "theme_color": "#2d5f73",
+  "lang": "ja",
+  "description": "含水比計算と試料調整ができるシンプルなアプリ"
+}
